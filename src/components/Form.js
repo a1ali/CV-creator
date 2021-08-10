@@ -1,30 +1,50 @@
 import React, { useState } from "react";
 import Header from "./Header";
+import Experience from "./Experience";
+import Footer from "./Footer";
+import { v4 as uuidv4 } from "uuid";
 
 function Form() {
     let [firstName, setFirst] = useState("");
-    let [jobs, setJobs] = useState(1);
+    let [jobs, setJobs] = useState([
+        { id: uuidv4(), position: "", company: "", city: "", from: "", to: "" },
+    ]);
+    // let [experience, setExperience] = useState({});
+
+    const increaseJobs = () => {
+        let newJobs = jobs.slice();
+        newJobs.push({ id: uuidv4() });
+        setJobs(newJobs);
+    };
+
+    const deleteJobs = (id) => {
+        let newJobs = jobs.filter((job) => job.id !== id);
+        setJobs(newJobs);
+    };
+
+    const updateJobs = (obj) => {
+        let jobsCopy = jobs.slice();
+        let jobsExist = false;
+        jobsCopy.forEach((job) => {
+            if (job.id === obj.id) {
+                jobsExist = true;
+                job.position = obj.position;
+                job.company = obj.company;
+                job.city = obj.city;
+                job.from = obj.from;
+                job.to = obj.to;
+                //create a reference free copy of the object
+            }
+        });
+        if (!jobsExist) {
+            jobsCopy.push(obj);
+        }
+        setJobs(jobsCopy);
+    };
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 bg-gray-600 border-r-2 border-gray-800 flex flex-col">
-            <h1 className="text-4xl font-semibold px-6 pt-6 text-gray-100 mb-3 flex justify-between items-center flex-none h-14">
-                <span>CVENETOR</span>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                    />
-                </svg>
-            </h1>
-
+            <Header></Header>
             <form
                 className="flex flex-col w-full  p-6 pt-16 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-500 scrollbar-track-gray-400"
                 style={{ maxHeight: `calc(100vh - 70px)` }}
@@ -97,7 +117,7 @@ function Form() {
                                 placeholder="xxx-xxx-xxxx"
                                 className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
                                 required
-                                maxlength="12"
+                                maxLength="12"
                                 pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
                             />
                         </div>
@@ -193,180 +213,32 @@ function Form() {
                         Work Experience
                     </h1>
 
-                    {/* <div>
-                        <div className="flex flex-col space-y-1">
-                            <label
-                                htmlFor="position"
-                                className="text-sm text-gray-100 font-sans"
-                            >
-                                Position:
-                            </label>
-                            <input
-                                type="text"
-                                id="position"
-                                placeholder="Position"
-                                className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                                required
-                            />
-                        </div>
-
-                        <div className="flex flex-col space-y-1 md:flex-row md:space-x-3 md:space-y-0 justify-center">
-                            <div className="w-full">
-                                <label
-                                    htmlFor="company"
-                                    className="text-sm text-gray-100"
-                                >
-                                    Company:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="company"
-                                    placeholder="Company"
-                                    className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                                    required
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label
-                                    htmlFor="city"
-                                    className="text-sm text-gray-100"
-                                >
-                                    City:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="City"
-                                    placeholder="city"
-                                    className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col space-y-1 md:flex-row md:space-x-3 md:space-y-0 justify-center">
-                            <div className="w-full">
-                                <label
-                                    htmlFor="from"
-                                    className="text-sm text-gray-100"
-                                >
-                                    From:
-                                </label>
-                                <input
-                                    type="date"
-                                    id="from"
-                                    className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1 text-xs"
-                                    required
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label
-                                    htmlFor="To"
-                                    className="text-sm text-gray-100"
-                                >
-                                    To:
-                                </label>
-                                <input
-                                    type="date"
-                                    id="to"
-                                    className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-300 mt-1 text-xs "
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-col">
-                            <button>Add</button>
-                            <button>Delete</button>
-                        </div>
-                    </div> */}
-                    <Experience></Experience>
-                    <Experience></Experience>
-                    <Experience></Experience>
+                    {jobs.map((job) => (
+                        <Experience
+                            id={job.id}
+                            handleAdd={increaseJobs}
+                            deleteJob={deleteJobs}
+                            updateJobs={updateJobs}
+                        ></Experience>
+                    ))}
                 </section>
+
+                {/* <section>
+                    {jobs.map(job => (
+                        <div>
+
+                            <div>{job.id}</div>
+                            <div>{job.position}</div>
+                            <div>{job.company}</div>
+                            <div>{job.from}</div>
+                        </div>
+
+                    ))}
+                </section> */}
+                <Footer />
             </form>
         </div>
     );
 }
-
-const Experience = () => {
-    return (
-        <div>
-            <div className="flex flex-col space-y-1">
-                <label
-                    htmlFor="position"
-                    className="text-sm text-gray-100 font-sans"
-                >
-                    Position:
-                </label>
-                <input
-                    type="text"
-                    id="position"
-                    placeholder="Position"
-                    className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                    required
-                />
-            </div>
-
-            <div className="flex flex-col space-y-1 md:flex-row md:space-x-3 md:space-y-0 justify-center">
-                <div className="w-full">
-                    <label htmlFor="company" className="text-sm text-gray-100">
-                        Company:
-                    </label>
-                    <input
-                        type="text"
-                        id="company"
-                        placeholder="Company"
-                        className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                        required
-                    />
-                </div>
-
-                <div className="w-full">
-                    <label htmlFor="city" className="text-sm text-gray-100">
-                        City:
-                    </label>
-                    <input
-                        type="text"
-                        id="City"
-                        placeholder="city"
-                        className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                        required
-                    />
-                </div>
-            </div>
-
-            <div className="flex flex-col space-y-1 md:flex-row md:space-x-3 md:space-y-0 justify-center">
-                <div className="w-full">
-                    <label htmlFor="from" className="text-sm text-gray-100">
-                        From:
-                    </label>
-                    <input
-                        type="date"
-                        id="from"
-                        className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1 text-xs"
-                        required
-                    />
-                </div>
-
-                <div className="w-full">
-                    <label htmlFor="To" className="text-sm text-gray-100">
-                        To:
-                    </label>
-                    <input
-                        type="date"
-                        id="to"
-                        className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-300 mt-1 text-xs "
-                        required
-                    />
-                </div>
-            </div>
-            <div className="flex flex-col">
-                <button>Add</button>
-                <button>Delete</button>
-            </div>
-        </div>
-    );
-};
 
 export default Form;
