@@ -3,11 +3,38 @@ import Header from "./Header";
 import Experience from "./Experience";
 import Footer from "./Footer";
 import { v4 as uuidv4 } from "uuid";
+import Education from "./Education";
+import { m } from "framer-motion";
 
 function Form() {
     let [firstName, setFirst] = useState("");
+
+    let [personal, setPersonal] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        description: "",
+    });
+
     let [jobs, setJobs] = useState([
         { id: uuidv4(), position: "", company: "", city: "", from: "", to: "" },
+    ]);
+    
+    let [educations, setEducations] = useState([
+        {
+            id: uuidv4(),
+            university: "",
+            degree: "",
+            city: "",
+            from: "",
+            to: "",
+            major: "",
+        },
     ]);
     // let [experience, setExperience] = useState({});
 
@@ -40,6 +67,38 @@ function Form() {
             jobsCopy.push(obj);
         }
         setJobs(jobsCopy);
+    };
+
+    const increaseEducation = () => {
+        let neweducations = educations.slice();
+        neweducations.push({ id: uuidv4() });
+        setEducations(neweducations);
+    };
+
+    const deleteEducation = (id) => {
+        let newEdu = educations.filter((edu) => edu.id !== id);
+        setEducations(newEdu);
+    };
+
+    const updateEducation = (obj) => {
+        let newEducations = educations.slice();
+        let eduExist = false;
+        newEducations.forEach((edu) => {
+            if (edu.id === obj.id) {
+                eduExist = true;
+                edu.university = obj.university;
+                edu.degree = obj.degree;
+                edu.city = obj.city;
+                edu.from = obj.from;
+                edu.to = obj.to;
+                edu.major = obj.major;
+                //create a reference free copy of the object
+            }
+        });
+        if (!eduExist) {
+            newEducations.push(obj);
+        }
+        setEducations(newEducations);
     };
 
     return (
@@ -223,18 +282,20 @@ function Form() {
                     ))}
                 </section>
 
-                {/* <section>
-                    {jobs.map(job => (
-                        <div>
-
-                            <div>{job.id}</div>
-                            <div>{job.position}</div>
-                            <div>{job.company}</div>
-                            <div>{job.from}</div>
-                        </div>
-
+                <section className="border-t border-gray-400">
+                    <h1 className="text-lg font-semibold text-gray-100 mb-2 mt-4">
+                        Education
+                    </h1>
+                    {educations.map((edu) => (
+                        <Education
+                            id={edu.id}
+                            increaseEducation={increaseEducation}
+                            deleteEducation={deleteEducation}
+                            updateEducationArr={updateEducation}
+                        ></Education>
                     ))}
-                </section> */}
+                </section>
+
                 <Footer />
             </form>
         </div>
