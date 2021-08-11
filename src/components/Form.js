@@ -4,7 +4,7 @@ import Experience from "./Experience";
 import Footer from "./Footer";
 import { v4 as uuidv4 } from "uuid";
 import Education from "./Education";
-import { m } from "framer-motion";
+import Personal from "./Personal";
 
 function Form() {
     let [firstName, setFirst] = useState("");
@@ -24,7 +24,7 @@ function Form() {
     let [jobs, setJobs] = useState([
         { id: uuidv4(), position: "", company: "", city: "", from: "", to: "" },
     ]);
-    
+
     let [educations, setEducations] = useState([
         {
             id: uuidv4(),
@@ -109,7 +109,8 @@ function Form() {
                 style={{ maxHeight: `calc(100vh - 70px)` }}
             >
                 <section className="mb-4">
-                    <h1 className="text-lg font-semibold text-gray-100 mb-2">
+                    <Personal></Personal>
+                    {/* <h1 className="text-lg font-semibold text-gray-100 mb-2">
                         Personal Information
                     </h1>
                     <div className="flex flex-col md:flex-row space-y-1 md:space-x-3 md:space-y-0 w-full justify-center  ">
@@ -264,7 +265,7 @@ function Form() {
                             cols="30"
                             rows="4"
                         ></textarea>
-                    </div>
+                    </div> */}
                 </section>
 
                 <section className="border-t border-gray-400">
