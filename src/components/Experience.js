@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
     let [position, setPosition] = useState("");
@@ -25,6 +25,15 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
         experienceCopy.to = toDate;
         setExperience(experienceCopy);
     };
+
+    useEffect(() => {
+        updateExperience();
+    }, [position,company,city,fromDate,toDate])
+
+    useEffect(() => {
+        updateJobs(experience);
+    }, [experience])
+
     return (
         <div>
             <div className="flex flex-col space-y-1">
@@ -42,8 +51,8 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                     value={position}
                     onChange={(e) => {
                         setPosition(e.target.value);
-                        updateExperience();
-                        updateJobs(experience);
+                        // updateExperience();
+                        // updateJobs(experience);
                     }}
                     required
                 />
@@ -62,8 +71,8 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={company}
                         onChange={(e) => {
                             setCompany(e.target.value);
-                            updateExperience();
-                            updateJobs(experience);
+                            // updateExperience();
+                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -81,8 +90,8 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={city}
                         onChange={(e) => {
                             setCity(e.target.value);
-                            updateExperience();
-                            updateJobs(experience);
+                            // updateExperience();
+                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -101,8 +110,8 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={fromDate}
                         onChange={(e) => {
                             setFromDate(e.target.value);
-                            updateExperience();
-                            updateJobs(experience);
+                            // updateExperience();
+                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -119,8 +128,8 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={toDate}
                         onChange={(e) => {
                             setToDate(e.target.value);
-                            updateExperience();
-                            updateJobs(experience);
+                            // updateExperience();
+                            // updateJobs(experience);
                         }}
                         required
                     />

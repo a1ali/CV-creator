@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, memo } from "react";
 
-function Personal() {
+const  Personal = memo(({updatePersonalInfo}) => {
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
@@ -11,8 +11,33 @@ function Personal() {
     let [describe, setDescribe] = useState("");
     let [state, setState] = useState("");
 
-    // to do
-    //  implement state handling and updating to parent component
+    let [personalObj, setPersonalObj] = useState({});
+
+    const updatePersonalObj = () => {
+        let objCopy = Object.assign({}, personalObj);
+        objCopy.firstName = firstName
+        objCopy.lastName = lastName
+        objCopy.email = email
+        objCopy.phone = phone
+        objCopy.address = address
+        objCopy.city = city
+        objCopy.zip = zip
+        objCopy.describe = describe
+        objCopy.state = state
+        setPersonalObj(objCopy)
+        
+    }
+    // [firstName,lastName,email,phone,address,city,zip,describe,state, personalObj]
+
+    useEffect(() => {
+        // updatePersonalObj()
+        updatePersonalInfo(personalObj)
+    }, [personalObj])       
+    
+    useEffect(() => {
+        updatePersonalObj()
+    }, [firstName,lastName,email,phone,address,city,zip,describe,state])
+
     return (
         <div>
             <h1 className="text-lg font-semibold text-gray-100 mb-2">
@@ -31,9 +56,11 @@ function Personal() {
                         id="firstName"
                         placeholder="First name"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1 justify-center"
-                        value={firstName}
+                        //value={firstName}
                         onChange={(e) => {
                             setFirstName(e.target.value);
+                            
+                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -51,6 +78,12 @@ function Personal() {
                         id="lastName"
                         placeholder="Last name"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                        value={lastName}
+                        onChange={(e) => {
+                            setLastName(e.target.value);
+                            // updatePersonalObj()
+                            // updatePersonalInfo(personalObj)
+                        }}
                         required
                     />
                 </div>
@@ -66,6 +99,12 @@ function Personal() {
                         id="email"
                         placeholder="Email"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                            // updatePersonalObj()
+                            // updatePersonalInfo(personalObj)
+                        }}
                         required
                     />
                 </div>
@@ -79,9 +118,14 @@ function Personal() {
                         id="email"
                         placeholder="xxx-xxx-xxxx"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                        value={phone}
+                        onChange={(e) => {
+                            setPhone(e.target.value);
+                            // updatePersonalObj()
+                            // updatePersonalInfo(personalObj)
+                        }}
                         required
-                        maxLength="12"
-                        pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+
                     />
                 </div>
             </div>
@@ -98,6 +142,12 @@ function Personal() {
                     id="address"
                     placeholder="Address"
                     className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={address}
+                    onChange={(e) => {
+                        setAddress(e.target.value);
+                        // updatePersonalObj()
+                        // updatePersonalInfo(personalObj)
+                    }}
                     required
                 />
             </div>
@@ -114,6 +164,12 @@ function Personal() {
                     id="city"
                     placeholder="City"
                     className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={city}
+                    onChange={(e) => {
+                        setCity(e.target.value);
+                        // updatePersonalObj()
+                        // updatePersonalInfo(personalObj)
+                    }}
                     required
                 />
             </div>
@@ -128,6 +184,12 @@ function Personal() {
                         id="state"
                         placeholder="State"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                        value={state}
+                        onChange={(e) => {
+                            setState(e.target.value);
+                            // updatePersonalObj()
+                            // updatePersonalInfo(personalObj)
+                        }}
                         required
                     />
                 </div>
@@ -141,6 +203,12 @@ function Personal() {
                         id="zip"
                         placeholder="zip code"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                        value={zip}
+                        onChange={(e) => {
+                            setZip(e.target.value);
+                            // updatePersonalObj()
+                            // updatePersonalInfo(personalObj)
+                        }}
                         required
                     />
                 </div>
@@ -158,6 +226,12 @@ function Personal() {
                     id="description"
                     placeholder="Description"
                     className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={describe}
+                    onChange={(e) => {
+                        setDescribe(e.target.value);
+                        // updatePersonalObj()
+                        // updatePersonalInfo(personalObj)
+                    }}
                     required
                     cols="30"
                     rows="4"
@@ -165,6 +239,6 @@ function Personal() {
             </div>
         </div>
     );
-}
+})
 
 export default Personal;

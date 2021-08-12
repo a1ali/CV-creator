@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr }) => {
     let [university, setUniversity] = useState("");
@@ -28,6 +28,15 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
         educationCopy.major = major;
         setEducation(educationCopy);
     };
+
+    useEffect(() => {
+        updateEducation();
+    }, [university,degree,city,fromDate,toDate,major])
+
+    useEffect(() => {
+        updateEducationArr(education);
+    }, [education])
+
     return (
         <div >
             <div className="flex flex-col space-y-1">
@@ -45,8 +54,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                     value={university}
                     onChange={(e) => {
                         setUniversity(e.target.value);
-                        updateEducation();
-                        updateEducationArr(education);
+                        // updateEducation();
+                        // updateEducationArr(education);
                     }}
                     required
                 />
@@ -65,8 +74,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={degree}
                         onChange={(e) => {
                             setDegree(e.target.value);
-                            updateEducation();
-                            updateEducationArr(education);
+                            // updateEducation();
+                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -84,8 +93,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={major}
                         onChange={(e) => {
                             setMajor(e.target.value);
-                            updateEducation();
-                            updateEducationArr(education);
+                            // updateEducation();
+                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -104,8 +113,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={city}
                         onChange={(e) => {
                             setCity(e.target.value);
-                            updateEducation();
-                            updateEducationArr(education);
+                            // updateEducation();
+                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -123,8 +132,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={fromDate}
                         onChange={(e) => {
                             setFromDate(e.target.value);
-                            updateEducation();
-                            updateEducationArr(education);
+                            // updateEducation();
+                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -141,8 +150,8 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={toDate}
                         onChange={(e) => {
                             setToDate(e.target.value);
-                            updateEducation();
-                            updateEducationArr(education);
+                            // updateEducation();
+                            // updateEducationArr(education);
                         }}
                         required
                     />

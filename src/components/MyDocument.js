@@ -15,18 +15,22 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = () => (
-        <Document>
-            <Page size="A4" style={styles.page}>
-                <View style={styles.section}>
-                    <Text>Section #1 dfdfdfdf</Text>
-                </View>
-                <View style={styles.section}>
-                    <Text>Section #2 dfdfdfdfd</Text>
-                </View>
-            </Page>
-        </Document>
-    
+const MyDocument = ({ cvInfo }) => (
+    <Document>
+        <Page size="A4" style={styles.page}>
+            <View style={styles.section}>
+                {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
+                {cvInfo.personal.firstName ? (
+                    <Text>{cvInfo.personal.firstName}</Text>
+                ) : (
+                    <Text>First Name</Text>
+                )}
+            </View>
+            <View style={styles.section}>
+                <Text>Section #2 dfdfdfdfd</Text>
+            </View>
+        </Page>
+    </Document>
 );
 
 export default MyDocument;
