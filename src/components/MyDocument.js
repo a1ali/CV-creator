@@ -4,13 +4,27 @@ import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 // Create styles
 const styles = StyleSheet.create({
     page: {
-        flexDirection: "row",
-        backgroundColor: "#E4E4E4",
+        flexDirection: "column",
     },
-    section: {
-        margin: 10,
-        padding: 10,
-        flexGrow: 1,
+    header: {
+        padding: 20,
+        backgroundColor: "#003A75",
+        height: "80px",
+        alignItems: "center",
+        flexDirection: "row",
+        color: "#fff",
+        fontSize: "30px",
+       
+    },
+    test: {
+        backgroundColor: "#62548b",
+    },
+    Firstname : {
+        marginLeft: "10px"
+    },
+    name: {
+        
+        paddingRight: "5px",
     },
 });
 
@@ -18,16 +32,23 @@ const styles = StyleSheet.create({
 const MyDocument = ({ cvInfo }) => (
     <Document>
         <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-                {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
-                {cvInfo.personal.firstName ? (
-                    <Text>{cvInfo.personal.firstName}</Text>
-                ) : (
-                    <Text>First Name</Text>
-                )}
-            </View>
-            <View style={styles.section}>
-                <Text>Section #2 dfdfdfdfd</Text>
+            <View style={styles.header}>
+                <View style={styles.Firstname}>
+                    {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
+                    {cvInfo.personal.firstName ? (
+                        <Text>{cvInfo.personal.firstName + " "} </Text>
+                    ) : (
+                        <Text>First Name</Text>
+                    )}
+                </View>
+                <View style={styles.Lastname}>
+                    {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
+                    {cvInfo.personal.lastName ? (
+                        <Text>{` ${cvInfo.personal.lastName}`} </Text>
+                    ) : (
+                        <Text>Last Name</Text>
+                    )}
+                </View>
             </View>
         </Page>
     </Document>
