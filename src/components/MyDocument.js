@@ -119,6 +119,7 @@ const MyDocument = ({ cvInfo }) => (
                         ) : (
                             <Text>city</Text>
                         )}
+                        <Text>,</Text>
                         {cvInfo.personal.state ? (
                             <Text>{` ${cvInfo.personal.state}`} </Text>
                         ) : (
