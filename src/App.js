@@ -9,8 +9,8 @@ function App() {
 
     let [cvInfo, setCVInfo] = useState({
         personal: {},
-        experience: {},
-        education: {},
+        experience: [],
+        education: [],
     });
 
 

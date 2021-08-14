@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         fontSize: "16px",
         color: "#003A75",
         fontWeight: "bolder",
+        paddingBottom: "3px",
         borderBottom: "1px",
         borderBottomColor: "#A9A9A9",
     },
@@ -48,12 +49,40 @@ const styles = StyleSheet.create({
         fontWeight: "light",
     },
     experienceSection: {
-        width:"450px",
+        width: "450px",
+        padding: "15px",
     },
     describeSection: {
         fontSize: "12px",
-        padding: "20px 15px",
+        padding: "20px 0px",
         lineHeight: "2px",
+    },
+    previousJobs: {
+        flexDirection: "column",
+        padding: "8px 10px",
+    },
+    jobTitleFromDate: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "400px",
+    },
+    jobTitle: {
+        fontSize: "15px",
+    },
+    jobDate: {
+        fontSize: "12px",
+    },
+    jobCompanyCity : {
+        flexDirection: "row",
+        width: "400px",
+        alignItems: "center",
+        paddingTop: "2px",
+    },
+    flexParent: {
+        paddingTop:"10px"
+    },
+    compnyCity: {
+        fontSize: "12px",
     }
 });
 
@@ -152,6 +181,56 @@ const MyDocument = ({ cvInfo }) => (
                             </Text>
                         )}
                     </Text>
+
+                    <Text style={styles.titleText}>Experience</Text>
+                    {/* previous jobs */}
+                    {/* to do add some description opttion for each job */}
+                    <View style={styles.previousJobs}>
+                        {cvInfo.experience.map((job) => (
+                            <View style={styles.flexParent}>
+                                <View style={styles.jobTitleFromDate}>
+                                    <Text style={styles.jobTitle}>
+                                        {job.position}
+                                    </Text>
+                                    <Text style={styles.jobDate}>
+                                        <Text>{job.from}</Text>
+                                        <Text> - </Text>
+                                        <Text>{job.to}</Text>
+                                    </Text>
+                                </View>
+                                <View style={styles.jobCompanyCity}>
+                                    <Text style={styles.compnyCity}>{job.company}</Text>
+                                    <Text> </Text>
+                                    <Text style={styles.compnyCity}>{job.city}</Text>
+                                </View>
+                            </View>
+                        ))}
+                    </View>
+
+                    <Text style={styles.titleText}>Education</Text>
+                    {/* previous Education */}
+                    <View style={styles.previousJobs}>
+                        {/* to do fix the education section */}
+                        {cvInfo.education.map((edu) => (
+                            <View style={styles.flexParent}>
+                                <View style={styles.jobTitleFromDate}>
+                                    <Text style={styles.jobTitle}>
+                                        {edu.position}
+                                    </Text>
+                                    <Text style={styles.jobDate}>
+                                        <Text>{edu.from}</Text>
+                                        <Text> - </Text>
+                                        <Text>{edu.to}</Text>
+                                    </Text>
+                                </View>
+                                <View style={styles.jobCompanyCity}>
+                                    <Text style={styles.compnyCity}>{edu.company}</Text>
+                                    <Text> </Text>
+                                    <Text style={styles.compnyCity}>{edu.city}</Text>
+                                </View>
+                            </View>
+                        ))}
+                    </View>
                 </View>
             </View>
         </Page>
