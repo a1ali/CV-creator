@@ -72,17 +72,41 @@ const styles = StyleSheet.create({
     jobDate: {
         fontSize: "12px",
     },
-    jobCompanyCity : {
+    jobCompanyCity: {
         flexDirection: "row",
         width: "400px",
         alignItems: "center",
         paddingTop: "2px",
     },
     flexParent: {
-        paddingTop:"10px"
+        paddingTop: "10px",
+        borderBottom: "1px",
+        borderBottomColor: "#A9A9A9",
+        paddingBottom: "5px",
     },
     compnyCity: {
         fontSize: "12px",
+    },
+    jobDescribe: {
+        fontSize: "12px",
+        paddingTop: "5px",
+        
+    },
+    eduDate: {
+        fontSize: "10px",
+        paddingTop: "3px",
+    },
+    relevantCourses: {
+        fontSize: "12px",
+        paddingTop: "10px",
+    },
+    courses: {
+        fontSize: "10px",
+        paddingTop: "5px",
+        paddingLeft: "5px"
+    },
+    eduDegree : {
+        fontSize: "15px",
     }
 });
 
@@ -199,10 +223,17 @@ const MyDocument = ({ cvInfo }) => (
                                     </Text>
                                 </View>
                                 <View style={styles.jobCompanyCity}>
-                                    <Text style={styles.compnyCity}>{job.company}</Text>
+                                    <Text style={styles.compnyCity}>
+                                        {job.company}
+                                    </Text>
                                     <Text> </Text>
-                                    <Text style={styles.compnyCity}>{job.city}</Text>
+                                    <Text style={styles.compnyCity}>
+                                        {job.city}
+                                    </Text>
                                 </View>
+                                <Text style={styles.jobDescribe}>
+                                    {job.jobDescribe}
+                                </Text>
                             </View>
                         ))}
                     </View>
@@ -214,20 +245,37 @@ const MyDocument = ({ cvInfo }) => (
                         {cvInfo.education.map((edu) => (
                             <View style={styles.flexParent}>
                                 <View style={styles.jobTitleFromDate}>
-                                    <Text style={styles.jobTitle}>
-                                        {edu.position}
+                                    <Text style={styles.eduDegree}>
+                                        {edu.degree}
                                     </Text>
                                     <Text style={styles.jobDate}>
-                                        <Text>{edu.from}</Text>
+                                        {/* <Text>{edu.from}</Text>
                                         <Text> - </Text>
-                                        <Text>{edu.to}</Text>
+                                        <Text>{edu.to}</Text> */}
+                                        <Text>{edu.major}</Text>
                                     </Text>
                                 </View>
                                 <View style={styles.jobCompanyCity}>
-                                    <Text style={styles.compnyCity}>{edu.company}</Text>
-                                    <Text> </Text>
-                                    <Text style={styles.compnyCity}>{edu.city}</Text>
+                                    <Text style={styles.compnyCity}>
+                                        {edu.university}
+                                    </Text>
+                                    <Text>, </Text>
+                                    <Text style={styles.compnyCity}>
+                                        {edu.city}
+                                    </Text>
                                 </View>
+                                <Text style={styles.eduDate}>
+                                    <Text>{edu.from}</Text>
+                                    <Text> - </Text>
+                                    <Text>{edu.to}</Text>
+                                </Text>
+                                <Text style={styles.relevantCourses}>
+                                    Relevant Courses:
+                                </Text>
+                                <Text style={styles.courses}>
+                                    {edu.relevantCourses}
+                                </Text>
+
                             </View>
                         ))}
                     </View>

@@ -7,6 +7,7 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
     let [fromDate, setFromDate] = useState("");
     let [toDate, setToDate] = useState("");
     let [major, setMajor] = useState("");
+    let [relevantCourses, setRelevantCourses] = useState('')
 
     let [education, setEducation] = useState({
         id: id,
@@ -16,6 +17,7 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
         from: "",
         to: "",
         major: "",
+        relevantCourses:"",
     });
 
     const updateEducation = () => {
@@ -26,12 +28,13 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
         educationCopy.from = fromDate;
         educationCopy.to = toDate;
         educationCopy.major = major;
+        educationCopy.relevantCourses = relevantCourses;
         setEducation(educationCopy);
     };
 
     useEffect(() => {
         updateEducation();
-    }, [university,degree,city,fromDate,toDate,major])
+    }, [university,degree,city,fromDate,toDate,major, relevantCourses])
 
     useEffect(() => {
         updateEducationArr(education);
@@ -157,6 +160,31 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                     />
                 </div>
             </div>
+
+            <div className="flex flex-col mt-1">
+                <label
+                    htmlFor="description"
+                    className="text-sm text-gray-100 font-sans"
+                >
+                    Relevant courses:
+                </label>
+                <textarea
+                    type="text"
+                    id="description"
+                    placeholder="Relevant courses"
+                    className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={relevantCourses}
+                    onChange={(e) => {
+                        setRelevantCourses(e.target.value);
+                        // updatePersonalObj()
+                        // updatePersonalInfo(personalObj)
+                    }}
+                    required
+                    cols="30"
+                    rows="4"
+                ></textarea>
+            </div>
+
             <div className="flex flex-col">
                 <button
                     className="w-full bg-gray-300 mt-6 h-8 rounded-md text-lg font-semibold flex items-center justify-center space-x-2 hover:bg-gray-100"

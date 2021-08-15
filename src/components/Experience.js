@@ -6,6 +6,7 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
     let [city, setCity] = useState("");
     let [fromDate, setFromDate] = useState("");
     let [toDate, setToDate] = useState("");
+    let [jobDescribe, setJobDescribe] = useState("");
 
     let [experience, setExperience] = useState({
         id: id,
@@ -14,6 +15,7 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
         city: "",
         from: "",
         to: "",
+        jobDescribe: "",
     });
 
     const updateExperience = () => {
@@ -23,16 +25,17 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
         experienceCopy.city = city;
         experienceCopy.from = fromDate;
         experienceCopy.to = toDate;
+        experienceCopy.jobDescribe = jobDescribe;
         setExperience(experienceCopy);
     };
 
     useEffect(() => {
         updateExperience();
-    }, [position,company,city,fromDate,toDate])
+    }, [position, company, city, fromDate, toDate, jobDescribe]);
 
     useEffect(() => {
         updateJobs(experience);
-    }, [experience])
+    }, [experience]);
 
     return (
         <div>
@@ -135,6 +138,31 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                     />
                 </div>
             </div>
+
+            <div className="flex flex-col mt-1">
+                <label
+                    htmlFor="description"
+                    className="text-sm text-gray-100 font-sans"
+                >
+                    Job description:
+                </label>
+                <textarea
+                    type="text"
+                    id="description"
+                    placeholder="Description"
+                    className="rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={jobDescribe}
+                    onChange={(e) => {
+                        setJobDescribe(e.target.value);
+                        // updatePersonalObj()
+                        // updatePersonalInfo(personalObj)
+                    }}
+                    required
+                    cols="30"
+                    rows="4"
+                ></textarea>
+            </div>
+
             <div className="flex flex-col">
                 <button
                     className="w-full bg-gray-300 mt-6 h-8 rounded-md text-lg font-semibold flex items-center justify-center space-x-2 hover:bg-gray-100"
@@ -181,4 +209,4 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
     );
 };
 
-export default Experience
+export default Experience;

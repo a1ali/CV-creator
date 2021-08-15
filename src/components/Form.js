@@ -6,10 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import Education from "./Education";
 import Personal from "./Personal";
 
-function Form({updateCVInfo, updatePDF}) {
-    
-
-
+function Form({ updateCVInfo, updatePDF }) {
     let [personal, setPersonal] = useState({
         firstName: "",
         lastName: "",
@@ -23,7 +20,15 @@ function Form({updateCVInfo, updatePDF}) {
     });
 
     let [jobs, setJobs] = useState([
-        { id: uuidv4(), position: "", company: "", city: "", from: "", to: "" },
+        {
+            id: uuidv4(),
+            position: "",
+            company: "",
+            city: "",
+            from: "",
+            to: "",
+            jobDescribe: "",
+        },
     ]);
 
     let [educations, setEducations] = useState([
@@ -35,6 +40,7 @@ function Form({updateCVInfo, updatePDF}) {
             from: "",
             to: "",
             major: "",
+            relevantCourses: "",
         },
     ]);
     // let [experience, setExperience] = useState({});
@@ -70,6 +76,7 @@ function Form({updateCVInfo, updatePDF}) {
                 job.city = obj.city;
                 job.from = obj.from;
                 job.to = obj.to;
+                job.jobDescribe = obj.jobDescribe;
                 //create a reference free copy of the object
             }
         });
@@ -105,6 +112,7 @@ function Form({updateCVInfo, updatePDF}) {
                 edu.from = obj.from;
                 edu.to = obj.to;
                 edu.major = obj.major;
+                edu.relevantCourses = obj.relevantCourses;
                 //create a reference free copy of the object
             }
         });
@@ -116,8 +124,8 @@ function Form({updateCVInfo, updatePDF}) {
     };
 
     useEffect(() => {
-        updateCVInfo(personal, jobs, educations)
-    }, [personal,educations,jobs])
+        updateCVInfo(personal, jobs, educations);
+    }, [personal, educations, jobs]);
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 bg-gray-600 border-r-2 border-gray-800 flex flex-col">
@@ -161,10 +169,14 @@ function Form({updateCVInfo, updatePDF}) {
                     ))}
                 </section>
 
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    updatePDF()
-                }}>Update PDF</button>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        updatePDF();
+                    }}
+                >
+                    Update PDF
+                </button>
 
                 <Footer />
             </form>
