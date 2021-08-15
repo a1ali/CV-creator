@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     jobDescribe: {
         fontSize: "12px",
         paddingTop: "5px",
-        
     },
     eduDate: {
         fontSize: "10px",
@@ -103,11 +102,11 @@ const styles = StyleSheet.create({
     courses: {
         fontSize: "10px",
         paddingTop: "5px",
-        paddingLeft: "5px"
+        paddingLeft: "5px",
     },
-    eduDegree : {
+    eduDegree: {
         fontSize: "15px",
-    }
+    },
 });
 
 // Create Document Component
@@ -115,9 +114,10 @@ const MyDocument = ({ cvInfo }) => (
     <Document>
         <Page size="A4" style={styles.page}>
             {/* Header */}
+
+            <View></View>
             <View style={styles.header}>
                 <View style={styles.Firstname}>
-                    {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
                     {cvInfo.personal.firstName ? (
                         <Text>{cvInfo.personal.firstName} </Text>
                     ) : (
@@ -125,7 +125,6 @@ const MyDocument = ({ cvInfo }) => (
                     )}
                 </View>
                 <View style={styles.Lastname}>
-                    {/* {cvInfo && <Text>{cvInfo.personal.firstName}</Text>} */}
                     {cvInfo.personal.lastName ? (
                         <Text>{` ${cvInfo.personal.lastName}`} </Text>
                     ) : (
@@ -241,7 +240,6 @@ const MyDocument = ({ cvInfo }) => (
                     <Text style={styles.titleText}>Education</Text>
                     {/* previous Education */}
                     <View style={styles.previousJobs}>
-                        {/* to do fix the education section */}
                         {cvInfo.education.map((edu) => (
                             <View style={styles.flexParent}>
                                 <View style={styles.jobTitleFromDate}>
@@ -249,9 +247,6 @@ const MyDocument = ({ cvInfo }) => (
                                         {edu.degree}
                                     </Text>
                                     <Text style={styles.jobDate}>
-                                        {/* <Text>{edu.from}</Text>
-                                        <Text> - </Text>
-                                        <Text>{edu.to}</Text> */}
                                         <Text>{edu.major}</Text>
                                     </Text>
                                 </View>
@@ -275,7 +270,6 @@ const MyDocument = ({ cvInfo }) => (
                                 <Text style={styles.courses}>
                                     {edu.relevantCourses}
                                 </Text>
-
                             </View>
                         ))}
                     </View>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 
-const  Personal = memo(({updatePersonalInfo}) => {
+const Personal = ({ updatePersonalInfo }) => {
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
@@ -15,28 +15,35 @@ const  Personal = memo(({updatePersonalInfo}) => {
 
     const updatePersonalObj = () => {
         let objCopy = Object.assign({}, personalObj);
-        objCopy.firstName = firstName
-        objCopy.lastName = lastName
-        objCopy.email = email
-        objCopy.phone = phone
-        objCopy.address = address
-        objCopy.city = city
-        objCopy.zip = zip
-        objCopy.describe = describe
-        objCopy.state = state
-        setPersonalObj(objCopy)
-        
-    }
-    // [firstName,lastName,email,phone,address,city,zip,describe,state, personalObj]
+        objCopy.firstName = firstName;
+        objCopy.lastName = lastName;
+        objCopy.email = email;
+        objCopy.phone = phone;
+        objCopy.address = address;
+        objCopy.city = city;
+        objCopy.zip = zip;
+        objCopy.describe = describe;
+        objCopy.state = state;
+        setPersonalObj(objCopy);
+    };
 
     useEffect(() => {
-        // updatePersonalObj()
-        updatePersonalInfo(personalObj)
-    }, [personalObj])       
-    
+        updatePersonalInfo(personalObj);
+    }, [personalObj]);
+
     useEffect(() => {
-        updatePersonalObj()
-    }, [firstName,lastName,email,phone,address,city,zip,describe,state])
+        updatePersonalObj();
+    }, [
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        zip,
+        describe,
+        state,
+    ]);
 
     return (
         <div>
@@ -56,11 +63,8 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         id="firstName"
                         placeholder="First name"
                         className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1 justify-center"
-                        //value={firstName}
                         onChange={(e) => {
                             setFirstName(e.target.value);
-                            
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -81,8 +85,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         value={lastName}
                         onChange={(e) => {
                             setLastName(e.target.value);
-                            // updatePersonalObj()
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -102,8 +104,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         value={email}
                         onChange={(e) => {
                             setEmail(e.target.value);
-                            // updatePersonalObj()
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -121,11 +121,8 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         value={phone}
                         onChange={(e) => {
                             setPhone(e.target.value);
-                            // updatePersonalObj()
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
-
                     />
                 </div>
             </div>
@@ -145,8 +142,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                     value={address}
                     onChange={(e) => {
                         setAddress(e.target.value);
-                        // updatePersonalObj()
-                        // updatePersonalInfo(personalObj)
                     }}
                     required
                 />
@@ -167,8 +162,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                     value={city}
                     onChange={(e) => {
                         setCity(e.target.value);
-                        // updatePersonalObj()
-                        // updatePersonalInfo(personalObj)
                     }}
                     required
                 />
@@ -187,8 +180,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         value={state}
                         onChange={(e) => {
                             setState(e.target.value);
-                            // updatePersonalObj()
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -206,8 +197,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                         value={zip}
                         onChange={(e) => {
                             setZip(e.target.value);
-                            // updatePersonalObj()
-                            // updatePersonalInfo(personalObj)
                         }}
                         required
                     />
@@ -229,8 +218,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
                     value={describe}
                     onChange={(e) => {
                         setDescribe(e.target.value);
-                        // updatePersonalObj()
-                        // updatePersonalInfo(personalObj)
                     }}
                     required
                     cols="30"
@@ -239,6 +226,6 @@ const  Personal = memo(({updatePersonalInfo}) => {
             </div>
         </div>
     );
-})
+};
 
 export default Personal;

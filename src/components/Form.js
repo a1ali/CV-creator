@@ -5,8 +5,11 @@ import Footer from "./Footer";
 import { v4 as uuidv4 } from "uuid";
 import Education from "./Education";
 import Personal from "./Personal";
+import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
 
-function Form({ updateCVInfo, updatePDF }) {
+function Form({ updateCVInfo, downloadPDF }) {
+    let [show, setShow] = useState(false);
+
     let [personal, setPersonal] = useState({
         firstName: "",
         lastName: "",
@@ -43,26 +46,22 @@ function Form({ updateCVInfo, updatePDF }) {
             relevantCourses: "",
         },
     ]);
-    // let [experience, setExperience] = useState({});
 
     const updatePersonalInfo = (obj) => {
         let personalCopy = Object.assign({}, personal);
         personalCopy = obj;
         setPersonal(personalCopy);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const increaseJobs = () => {
         let newJobs = jobs.slice();
         newJobs.push({ id: uuidv4() });
         setJobs(newJobs);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const deleteJobs = (id) => {
         let newJobs = jobs.filter((job) => job.id !== id);
         setJobs(newJobs);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const updateJobs = (obj) => {
@@ -77,27 +76,23 @@ function Form({ updateCVInfo, updatePDF }) {
                 job.from = obj.from;
                 job.to = obj.to;
                 job.jobDescribe = obj.jobDescribe;
-                //create a reference free copy of the object
             }
         });
         if (!jobsExist) {
             jobsCopy.push(obj);
         }
         setJobs(jobsCopy);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const increaseEducation = () => {
         let neweducations = educations.slice();
         neweducations.push({ id: uuidv4() });
         setEducations(neweducations);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const deleteEducation = (id) => {
         let newEdu = educations.filter((edu) => edu.id !== id);
         setEducations(newEdu);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     const updateEducation = (obj) => {
@@ -113,19 +108,46 @@ function Form({ updateCVInfo, updatePDF }) {
                 edu.to = obj.to;
                 edu.major = obj.major;
                 edu.relevantCourses = obj.relevantCourses;
-                //create a reference free copy of the object
             }
         });
         if (!eduExist) {
             newEducations.push(obj);
         }
         setEducations(newEducations);
-        // updateCVInfo(personal, jobs, educations)
     };
 
     useEffect(() => {
         updateCVInfo(personal, jobs, educations);
     }, [personal, educations, jobs]);
+
+    useEffect(() => {
+        let complete = true;
+        for (let key in personal) {
+            if (personal[key] === "") {
+                complete = false;
+            }
+        }
+
+        jobs.forEach((job) => {
+            for (let key in job) {
+                if (job[key] === "") {
+                    complete = false;
+                }
+            }
+        });
+
+        educations.forEach((job) => {
+            for (let key in job) {
+                if (job[key] === "") {
+                    complete = false;
+                }
+            }
+        });
+
+        if (complete) {
+            setShow(true);
+        }
+    });
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 bg-gray-600 border-r-2 border-gray-800 flex flex-col">
@@ -169,15 +191,39 @@ function Form({ updateCVInfo, updatePDF }) {
                     ))}
                 </section>
 
-                <button
+                {/* <button
                     onClick={(e) => {
                         e.preventDefault();
-                        updatePDF();
+                        downloadPDF();
                     }}
                 >
                     Update PDF
-                </button>
-
+                </button> */}
+                {/* <PDFDownloadLink document={downloadPDF} fileName="somename.pdf">
+                    {({ blob, url, loading, error }) =>
+                        loading ? "Loading document..." : "Download now!"
+                    }
+                </PDFDownloadLink> */}
+                {/* {show ? (
+                    <PDFDownloadLink
+                        document={downloadPDF}
+                        fileName="somename.pdf"
+                        style={{
+                            textDecoration: "none",
+                            padding: "10px",
+                            color: "#4a4a4a",
+                            backgroundColor: "#f2f2f2",
+                            border: "1px solid #4a4a4a",
+                        }}
+                    >
+                        {({ blob, url, loading, error }) =>
+                            loading ? "Loading document..." : "Download now!"
+                        }
+                    </PDFDownloadLink>
+                ) : (
+                    <span>false</span>
+                )} */}
+                {/* {show? console.log(pdf(downloadPDF).toBlob()):<span>false</span>} */}
                 <Footer />
             </form>
         </div>

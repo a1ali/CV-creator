@@ -54,8 +54,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                     value={position}
                     onChange={(e) => {
                         setPosition(e.target.value);
-                        // updateExperience();
-                        // updateJobs(experience);
                     }}
                     required
                 />
@@ -74,8 +72,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={company}
                         onChange={(e) => {
                             setCompany(e.target.value);
-                            // updateExperience();
-                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -93,8 +89,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={city}
                         onChange={(e) => {
                             setCity(e.target.value);
-                            // updateExperience();
-                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -113,8 +107,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={fromDate}
                         onChange={(e) => {
                             setFromDate(e.target.value);
-                            // updateExperience();
-                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -131,8 +123,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                         value={toDate}
                         onChange={(e) => {
                             setToDate(e.target.value);
-                            // updateExperience();
-                            // updateJobs(experience);
                         }}
                         required
                     />
@@ -154,8 +144,6 @@ const Experience = ({ id, handleAdd, deleteJob, updateJobs }) => {
                     value={jobDescribe}
                     onChange={(e) => {
                         setJobDescribe(e.target.value);
-                        // updatePersonalObj()
-                        // updatePersonalInfo(personalObj)
                     }}
                     required
                     cols="30"

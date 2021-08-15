@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 
-const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr }) => {
+const Education = ({
+    id,
+    increaseEducation,
+    deleteEducation,
+    updateEducationArr,
+}) => {
     let [university, setUniversity] = useState("");
     let [degree, setDegree] = useState("");
     let [city, setCity] = useState("");
     let [fromDate, setFromDate] = useState("");
     let [toDate, setToDate] = useState("");
     let [major, setMajor] = useState("");
-    let [relevantCourses, setRelevantCourses] = useState('')
+    let [relevantCourses, setRelevantCourses] = useState("");
 
     let [education, setEducation] = useState({
         id: id,
@@ -17,7 +22,7 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
         from: "",
         to: "",
         major: "",
-        relevantCourses:"",
+        relevantCourses: "",
     });
 
     const updateEducation = () => {
@@ -34,14 +39,14 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
 
     useEffect(() => {
         updateEducation();
-    }, [university,degree,city,fromDate,toDate,major, relevantCourses])
+    }, [university, degree, city, fromDate, toDate, major, relevantCourses]);
 
     useEffect(() => {
         updateEducationArr(education);
-    }, [education])
+    }, [education]);
 
     return (
-        <div >
+        <div>
             <div className="flex flex-col space-y-1">
                 <label
                     htmlFor="university"
@@ -57,8 +62,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                     value={university}
                     onChange={(e) => {
                         setUniversity(e.target.value);
-                        // updateEducation();
-                        // updateEducationArr(education);
                     }}
                     required
                 />
@@ -77,8 +80,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={degree}
                         onChange={(e) => {
                             setDegree(e.target.value);
-                            // updateEducation();
-                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -86,7 +87,7 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
 
                 <div className="w-full">
                     <label htmlFor="major" className="text-sm text-gray-100">
-                    Major:
+                        Major:
                     </label>
                     <input
                         type="text"
@@ -96,8 +97,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={major}
                         onChange={(e) => {
                             setMajor(e.target.value);
-                            // updateEducation();
-                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -105,23 +104,21 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
             </div>
 
             <div className="w-full">
-                    <label htmlFor="city" className="text-sm text-gray-100">
-                        City:
-                    </label>
-                    <input
-                        type="text"
-                        id="City"
-                        placeholder="city"
-                        className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
-                        value={city}
-                        onChange={(e) => {
-                            setCity(e.target.value);
-                            // updateEducation();
-                            // updateEducationArr(education);
-                        }}
-                        required
-                    />
-                </div>
+                <label htmlFor="city" className="text-sm text-gray-100">
+                    City:
+                </label>
+                <input
+                    type="text"
+                    id="City"
+                    placeholder="city"
+                    className="w-full rounded-md shadow-sm border-gray-900 bg-gray-800 text-gray-100 mt-1"
+                    value={city}
+                    onChange={(e) => {
+                        setCity(e.target.value);
+                    }}
+                    required
+                />
+            </div>
 
             <div className="flex flex-col space-y-1 md:flex-row md:space-x-3 md:space-y-0 justify-center">
                 <div className="w-full">
@@ -135,8 +132,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={fromDate}
                         onChange={(e) => {
                             setFromDate(e.target.value);
-                            // updateEducation();
-                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -153,8 +148,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                         value={toDate}
                         onChange={(e) => {
                             setToDate(e.target.value);
-                            // updateEducation();
-                            // updateEducationArr(education);
                         }}
                         required
                     />
@@ -176,8 +169,6 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
                     value={relevantCourses}
                     onChange={(e) => {
                         setRelevantCourses(e.target.value);
-                        // updatePersonalObj()
-                        // updatePersonalInfo(personalObj)
                     }}
                     required
                     cols="30"
@@ -231,4 +222,4 @@ const Education = ({ id, increaseEducation, deleteEducation, updateEducationArr 
     );
 };
 
-export default Education
+export default Education;
