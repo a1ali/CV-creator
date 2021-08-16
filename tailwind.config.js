@@ -1,23 +1,23 @@
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
-    purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
-			colors: {
+            colors: {
                 lime: colors.lime,
                 gray: colors.coolGray,
             },
-		},
+            scale: {
+                "-1": "-1",
+            },
+        },
     },
     variants: {
         extend: {
-            scrollbar: ['dark', 'rounded'],
+            scrollbar: ["dark", "rounded"],
         },
     },
-    plugins: [
-		require('@tailwindcss/forms'),
-        require('tailwind-scrollbar'),
-	],
+    plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")],
 };
